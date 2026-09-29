@@ -1,242 +1,26 @@
-# Glow
+# glow
 
-Render markdown on the CLI, with _pizzazz_!
+本仓库是「glow」的安卓版本获取入口，附使用资料索引。
 
-<p align="center">
-    <img src="https://stuff.charm.sh/glow/glow-banner-github.gif" alt="Glow Logo">
-    <a href="https://github.com/charmbracelet/glow/releases"><img src="https://img.shields.io/github/release/charmbracelet/glow.svg" alt="Latest Release"></a>
-    <a href="https://pkg.go.dev/github.com/charmbracelet/glow?tab=doc"><img src="https://godoc.org/github.com/golang/gddo?status.svg" alt="GoDoc"></a>
-    <a href="https://github.com/charmbracelet/glow/actions"><img src="https://github.com/charmbracelet/glow/workflows/build/badge.svg" alt="Build Status"></a>
-    <a href="https://goreportcard.com/report/github.com/charmbracelet/glow"><img src="https://goreportcard.com/badge/charmbracelet/glow" alt="Go ReportCard"></a>
-</p>
+## 安装文件资源（夸克网盘）
 
-<p align="center">
-    <img src="https://github.com/user-attachments/assets/c2246366-f84b-4847-b431-32a61ca07b74" width="800" alt="Glow UI Demo">
-</p>
+> **glow 安装文件资源（夸克网盘）**：[https://pan.quark.cn/s/94d79030a4f2](https://pan.quark.cn/s/94d79030a4f2)
 
-## What is it?
+## 官方项目
 
-Glow is a terminal based markdown reader designed from the ground up to bring
-out the beauty—and power—of the CLI.
+- 上游项目：[charmbracelet/glow](https://github.com/charmbracelet/glow)
 
-Use it to discover markdown files, read documentation directly on the command
-line. Glow will find local markdown files in subdirectories or a local
-Git repository.
+## 更多资料
 
-## Installation
-
-### Package Manager
-
-```bash
-# macOS or Linux
-brew install glow
-```
-
-```bash
-# macOS (with MacPorts)
-sudo port install glow
-```
-
-```bash
-# Arch Linux (btw)
-pacman -S glow
-```
-
-```bash
-# Void Linux
-xbps-install -S glow
-```
-
-```bash
-# Nix shell
-nix-shell -p glow --command glow
-```
-
-```bash
-# FreeBSD
-pkg install glow
-```
-
-```bash
-# Solus
-eopkg install glow
-```
-
-```bash
-# Windows (with Chocolatey, Scoop, or Winget)
-choco install glow
-scoop install glow
-winget install charmbracelet.glow
-```
-
-```bash
-# Android (with termux)
-pkg install glow
-```
-
-```bash
-# Ubuntu (Snapcraft)
-sudo snap install glow
-```
-
-```bash
-# Debian/Ubuntu
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://repo.charm.sh/apt/gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/charm.gpg
-echo "deb [signed-by=/etc/apt/keyrings/charm.gpg] https://repo.charm.sh/apt/ * *" | sudo tee /etc/apt/sources.list.d/charm.list
-sudo apt update && sudo apt install glow
-```
-
-```bash
-# Fedora/RHEL
-echo '[charm]
-name=Charm
-baseurl=https://repo.charm.sh/yum/
-enabled=1
-gpgcheck=1
-gpgkey=https://repo.charm.sh/yum/gpg.key' | sudo tee /etc/yum.repos.d/charm.repo
-sudo yum install glow
-```
-
-Or download a binary from the [releases][releases] page. MacOS, Linux, Windows,
-FreeBSD and OpenBSD binaries are available, as well as Debian, RPM, and Alpine
-packages. ARM builds are also available for macOS, Linux, FreeBSD and OpenBSD.
-
-### Go
-
-Or just install it with `go`:
-
-```bash
-go install charm.land/glow/v3@latest
-```
-
-### Build (requires Go 1.21+)
-
-```bash
-git clone https://github.com/charmbracelet/glow.git
-cd glow
-go build
-```
-
-[releases]: https://github.com/charmbracelet/glow/releases
-
-## The TUI
-
-Simply run `glow` without arguments to start the textual user interface and
-browse local. Glow will find local markdown files in the
-current directory and below or, if you’re in a Git repository, Glow will search
-the repo.
-
-Markdown files can be read with Glow's high-performance pager. Most of the
-keystrokes you know from `less` are the same, but you can press `?` to list
-the hotkeys.
-
-## The CLI
-
-In addition to a TUI, Glow has a CLI for working with Markdown. To format a
-document use a markdown source as the primary argument:
-
-```bash
-# Read from file
-glow README.md
-
-# Read from stdin
-echo "[Glow](https://github.com/charmbracelet/glow)" | glow -
-
-# Fetch README from GitHub / GitLab
-glow github.com/charmbracelet/glow
-
-# Fetch markdown from HTTP
-glow https://host.tld/file.md
-```
-
-### Word Wrapping
-
-The `-w` flag lets you set a maximum width at which the output will be wrapped:
-
-```bash
-glow -w 60
-```
-
-### Paging
-
-CLI output can be displayed in your preferred pager with the `-p` flag. This defaults
-to the ANSI-aware `less -r` if `$PAGER` is not explicitly set.
-
-### Styles
-
-You can choose a style with the `-s` flag. When no flag is provided `glow` tries
-to detect your terminal's current background color and automatically picks
-either the `dark` or the `light` style for you.
-
-```bash
-glow -s [dark|light]
-```
-
-Alternatively you can also supply a custom JSON stylesheet:
-
-```bash
-glow -s mystyle.json
-```
-
-For additional usage details see:
-
-```bash
-glow --help
-```
-
-Check out the [Glamour Style Section](https://github.com/charmbracelet/glamour/blob/master/styles/gallery/README.md)
-to find more styles. Or [make your own](https://github.com/charmbracelet/glamour/tree/master/styles)!
-
-## The Config File
-
-If you find yourself supplying the same flags to `glow` all the time, it's
-probably a good idea to create a config file. Run `glow config`, which will open
-it in your favorite $EDITOR. Alternatively you can manually put a file named
-`glow.yml` in the default config path of you platform. If you're not sure where
-that is, please refer to `glow --help`.
-
-Here's an example config:
-
-```yaml
-# style name or JSON path (default "auto")
-style: "light"
-# mouse wheel support (TUI-mode only)
-mouse: true
-# use pager to display markdown
-pager: true
-# at which column should we word wrap?
-width: 80
-# show all files, including hidden and ignored.
-all: false
-# show line numbers (TUI-mode only)
-showLineNumbers: false
-# preserve newlines in the output
-preserveNewLines: false
-```
-
-## Contributing
-
-See [contributing][contribute].
-
-[contribute]: https://github.com/charmbracelet/glow/contribute
-
-## Feedback
-
-We’d love to hear your thoughts on this project. Feel free to drop us a note!
-
-- [Twitter](https://twitter.com/charmcli)
-- [The Fediverse](https://mastodon.social/@charmcli)
-- [Discord](https://charm.sh/chat)
-
-## License
-
-[MIT](https://github.com/charmbracelet/glow/raw/master/LICENSE)
+- [下载与安装教程](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/glow/%E4%B8%8B%E8%BD%BD%E4%B8%8E%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B.md)
+- [创建自己的智能体](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/glow/%E5%88%9B%E5%BB%BA%E8%87%AA%E5%B7%B1%E7%9A%84%E6%99%BA%E8%83%BD%E4%BD%93.md)
+- [常见问题与排查](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/glow/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E6%8E%92%E6%9F%A5.md)
+- [应用商店搜不到Glow怎么回事](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/glow/%E5%BA%94%E7%94%A8%E5%95%86%E5%BA%97%E6%90%9C%E4%B8%8D%E5%88%B0Glow%E6%80%8E%E4%B9%88%E5%9B%9E%E4%BA%8B.md)
+- [搜索别人的智能体](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/glow/%E6%90%9C%E7%B4%A2%E5%88%AB%E4%BA%BA%E7%9A%84%E6%99%BA%E8%83%BD%E4%BD%93.md)
+- [记忆簿怎么创建和回溯](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/glow/%E8%AE%B0%E5%BF%86%E7%B0%BF%E6%80%8E%E4%B9%88%E5%88%9B%E5%BB%BA%E5%92%8C%E5%9B%9E%E6%BA%AF.md)
+- [重启删除智能体与聊天记录](https://github.com/alipymanbu/Android/blob/master/%E5%AE%98%E7%BD%91%E7%89%88APP%E4%B8%8B%E8%BD%BD/glow/%E9%87%8D%E5%90%AF%E5%88%A0%E9%99%A4%E6%99%BA%E8%83%BD%E4%BD%93%E4%B8%8E%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95.md)
+- [全部软件目录](https://github.com/alipymanbu/Android/blob/master/%E5%85%A8%E9%83%A8%E8%BD%AF%E4%BB%B6%E7%9B%AE%E5%BD%95.md)
 
 ---
 
-Part of [Charm](https://charm.sh).
-
-<a href="https://charm.sh/"><img alt="The Charm logo" src="https://stuff.charm.sh/charm-badge.jpg" width="400"></a>
-
-Charm热爱开源 • Charm loves open source
+> 本仓库由上游项目 fork 而来，原始说明见[上游仓库](https://github.com/charmbracelet/glow)。
